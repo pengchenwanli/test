@@ -10,8 +10,6 @@ import (
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"
 	"gorm.io/gorm/schema"
-	//"internetbar/handler"
-	//"test/internal/services"
 )
 
 func main() {
@@ -28,20 +26,20 @@ func main() {
 	}
 	db, err := gorm.Open(dialector, gormConfig)
 	if err != nil {
-		log.Fatal("[F]gorm.Open(%v):%v", dsn, err)
+		log.Fatalf("[F]gorm.Open(%v):%v", dsn, err)
 	}
 	err = autoMigrate(db)
 	if err != nil {
-		log.Fatal("[F] autoMigrate error: %v", err)
+		log.Fatalf("[F] autoMigrate error: %v", err)
 	}
-	//accountService := services.NewAccountService(2.5, db)//NewAccountService NewAccountService
+	accountService := services.NewAccountService(2.5, db) //NewAccountService NewAccountService
 	adminService := services.NewAdminService(db)
-	//assetLogService := services.NewAssetLogService(db)
+	assetLogService := services.NewAssetLogService(db)
 
 	r := handler.New(
-		//accountService,
+		accountService,
 		adminService,
-		//assetLogService,
+		assetLogService,
 	)
 
 	r.Run(":8080")

@@ -12,17 +12,17 @@ type Handler struct {
 	service.AssetLogService
 }
 
-func New( //accountService service.AccountService,
+func New(accountService service.AccountService,
 	adminService service.AdminService,
-	//assetLogService service.AssetLogService,
+	assetLogService service.AssetLogService,
 ) *Handler {
 	e := gin.Default()
 
 	handler := &Handler{
-		engine: e,
-		//AccountService:  accountService,
-		AdminService: adminService,
-		//AssetLogService: assetLogService,
+		engine:          e,
+		AccountService:  accountService,
+		AdminService:    adminService,
+		AssetLogService: assetLogService,
 	}
 	handler.initRouter()
 	return handler

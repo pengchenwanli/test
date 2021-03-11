@@ -3,6 +3,7 @@ package services
 import (
 	"context"
 	"gorm.io/gorm"
+	"log"
 	"test/model"
 	"test/pkg/bcrypt"
 	"test/service"
@@ -37,6 +38,7 @@ func (s *accountService) NewAccount(ctx context.Context, req *service.NewAccount
 	}
 	err = s.db.Create(account).Error
 	if err != nil {
+		log.Printf("[D] service.NewAccount(%v): %v", req, err)
 		return nil, err
 	}
 	return &service.NewAccountRep{Account: account}, nil
@@ -44,7 +46,7 @@ func (s *accountService) NewAccount(ctx context.Context, req *service.NewAccount
 func (s *accountService) GetAccounts(ctx context.Context, req *service.GetAccountsReq) (*service.GetAccountsRep, error) {
 	rep := new(service.GetAccountsRep)
 	db := s.db.Model(model.Account{}). //选择指定模型,指定表名
-						Where(model.Account{
+						Where(&model.Account{
 			Id:     req.Id,
 			Name:   req.Name,
 			IdCard: req.IdCard,
@@ -74,13 +76,17 @@ func (s *accountService) ChargeAccount(ctx context.Context, req *service.ChargeA
 	assetLog := &model.Asset{
 		IdCard: req.IdCard,
 		Type:   model.AssetTypeCharge,
-		Amount: req.Amount,
+		Amount: float64(req.Amount),
 	}
 	err = s.db.Create(assetLog).Error //gorm创建记录利用db.Create,创建数据行
 	if err != nil {
 		return nil, err
 	}
 	account, err := s.GetAccountByIdCard(req.IdCard)
+	if err != nil {
+		return nil, err
+	}
+
 	return &service.ChargeAccountRep{Account: account}, err
 }
 func (s *accountService) CalcAccount(ctx context.Context, req *service.CalcAccountReq) (*service.CalcAccountRep, error) {
@@ -92,7 +98,7 @@ func (s *accountService) CalcAccount(ctx context.Context, req *service.CalcAccou
 	if err != nil {
 		return nil, err
 	}
-	assetLog := model.Asset{
+	assetLog := &model.Asset{
 		IdCard: req.IdCard,
 		Type:   model.AssetTypeConsume,
 		Amount: amount,
@@ -102,12 +108,15 @@ func (s *accountService) CalcAccount(ctx context.Context, req *service.CalcAccou
 		return nil, err
 	}
 	account, err := s.GetAccountByIdCard(req.IdCard)
+	if err != nil {
+		return nil, err
+	}
 	return &service.CalcAccountRep{Account: account}, nil
 }
 func (s *accountService) DeleteAccount(ctx context.Context, req *service.DeleteAccountReq) error {
 	err := s.db.
 		Where("id_card", req.IdCard).
-		Delete(model.Account{}).Error
+		Delete(&model.Account{}).Error
 	if err != nil {
 		return err
 	}

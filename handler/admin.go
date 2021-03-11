@@ -19,6 +19,7 @@ func (h *Handler) NewAdmin(c *gin.Context) {
 	if err != nil {
 		log.Printf("[E] NewAdmin:#{err}")
 		c.JSON(http.StatusInternalServerError, err.Error())
+		return
 	}
 	c.JSON(http.StatusOK, rep)
 }
@@ -34,6 +35,7 @@ func (h *Handler) Login(c *gin.Context) {
 	if err != nil {
 		log.Printf("[E] NewAdmin:#{err}")
 		c.JSON(http.StatusInternalServerError, err.Error())
+		return
 	}
 	c.JSON(http.StatusOK, rep)
 }
@@ -43,6 +45,7 @@ func (h *Handler) Logout(c *gin.Context) {
 	if err != nil {
 		log.Printf("[E] Logout:#{err}")
 		c.JSON(http.StatusInternalServerError, err.Error())
+		return
 	}
 	c.JSON(http.StatusOK, nil)
 }
@@ -59,8 +62,8 @@ func (h *Handler) SessionVerifier(c *gin.Context) {
 	if err != nil {
 		log.Printf("[E] SessionVerifier:%v", err)
 		c.JSON(http.StatusInternalServerError, err.Error())
-		c.Abort()
+		c.Abort() //Abort表示终止，也就是说，执行Abort的时候会停止所有的后面的中间件函数的调用。
 		return
 	}
-	c.Next() //作为中间件
+	c.Next() //作为中间件，简单理解next表示挂起，当处理完所有的中间件函数（包括本次请求）的时候才会停止，执行完一次完整的请求。
 }

@@ -9,9 +9,9 @@ const (
 )
 
 type Asset struct {
-	Id       int64 `json:"id" gorm:"primaryKey"`
-	IdCard   string
-	Type     int64
-	Amount   float64
-	CreateAt time.Time
+	Id       int64     `json:"id" gorm:"primaryKey"`
+	IdCard   string    `json:"id_card"`
+	Type     int64     `json:"type"`
+	Amount   float64   `json:"amount"`
+	CreateAt time.Time `json:"created_at"`
 }

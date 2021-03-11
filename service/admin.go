@@ -6,7 +6,7 @@ import (
 )
 
 type AdminService interface {
-	NewAdmin(ctx context.Context, req *NewAdminReq) (rep *NewAdminRep, err error)
+	NewAdmin(ctx context.Context, req *NewAdminReq) (*NewAdminRep, error)
 	LoginAdmin(ctx context.Context, req *LoginAdminReq) (rep *LoginAdminRep, err error)
 	LogoutAdmin(ctx context.Context) error
 	SessionVerify(ctx context.Context, req *SessionVerifyReq) (err error) //验证器

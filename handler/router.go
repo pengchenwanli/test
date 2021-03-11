@@ -11,8 +11,17 @@ func (h *Handler) initRouter() {
 			admin.POST("logout", h.Logout)
 		}
 		{
+			account := auth.Group("account")
+			account.GET("list", h.GetAccounts)
+			account.POST("new", h.NewAccount)
+			account.POST("charge", h.Charge)
+			account.POST("calc", h.CalcAccount)
+			account.DELETE("delete", h.DeleteAccount)
 
 		}
-
+		{
+			asset := auth.Group("asset")
+			asset.GET("", h.GetAssetLog)
+		}
 	}
 }

@@ -31,8 +31,8 @@ type GetAccountsRep struct {
 	Accounts []*model.Account `json:"account"`
 }
 type ChargeAccountReq struct {
-	IdCard string  `json:"id_card" form:"id_card" binding:"required"`
-	Amount float64 `json:"amount" form:"amount" binding:"required"`
+	IdCard string `json:"id_card" form:"id_card" binding:"required"`
+	Amount int    `json:"amount" form:"amount" binding:"required"`
 }
 type ChargeAccountRep struct {
 	Account *model.Account `json:"account"`

@@ -1,2 +1,5 @@
-# test  这是我做的一个网吧管理系统项目
+# test  这是一个网吧管理系统项目
 
+
+
+![project-building](https://img.shields.io/badge/project-building-brightgreen)

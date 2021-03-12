@@ -1,4 +1,4 @@
-/*package services
+package services
 
 import (
 	"context"
@@ -165,8 +165,8 @@ func (s *adminService) SessionVerify(ctx context.Context, req *service.SessionVe
 
 	return nil
 }
-*/
-package services
+
+/*package services
 
 import (
 	"context"
@@ -272,9 +272,6 @@ func (s *adminService) LoginAdmin(ctx context.Context, req *service.LoginAdminRe
 func (s *adminService) LogoutAdmin(ctx context.Context) error {
 	c := GetContext(ctx)
 	err := s.db.Where("admin_id=?", c.Admin.Id).Delete(&model.Token{}).Error
-	/*if err != nil {
-		return err
-	}*/
 	return err
 }
 func getTokenByAccessToken(db *gorm.DB, accessToken string) (*model.Token, error) {
@@ -319,3 +316,4 @@ func (s *adminService) SessionVerify(ctx context.Context, req *service.SessionVe
 	})
 	return nil
 }
+*/

@@ -12,8 +12,8 @@ func (h *Handler) initRouter() {
 		}
 		{
 			account := auth.Group("account")
-			account.GET("list", h.GetAccounts)
 			account.POST("new", h.NewAccount)
+			account.GET("list", h.GetAccounts)
 			account.POST("charge", h.Charge)
 			account.POST("calc", h.CalcAccount)
 			account.DELETE("delete", h.DeleteAccount)

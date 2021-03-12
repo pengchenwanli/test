@@ -11,5 +11,5 @@ type Admin struct {
 	Password string         `json:"-" gorm:"type:varchar(255)"`
 	CreateAt time.Time      `json:"create_at"`
 	UpdateAt time.Time      `json:"update_at"`
-	DeleteAt gorm.DeletedAt `json:"delete_at" gorm:"index"`
+	DeleteAt gorm.DeletedAt `json:"_" gorm:"index"`
 }

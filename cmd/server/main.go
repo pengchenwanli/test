@@ -14,7 +14,7 @@ import (
 
 func main() {
 	var err error
-	dsn := "root:124567@tcp(localhost:3306)/internetbar2?loc=Local&parseTime=true"
+	dsn := "root:124567@tcp(localhost:3306)/internetbar2?loc=Local&parseTime=True"
 	dialector := mysql.New(mysql.Config{
 		DSN: dsn,
 	})
@@ -24,7 +24,8 @@ func main() {
 		},
 		Logger: logger.Default,
 	}
-	db, err := gorm.Open(dialector, gormConfig)
+	db, err := gorm.Open(dialector, gormConfig) //连接数据库
+
 	if err != nil {
 		log.Fatalf("[F]gorm.Open(%v):%v", dsn, err)
 	}

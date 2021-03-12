@@ -19,5 +19,5 @@ type AssetLogReq struct {
 }
 type AssetLogRep struct {
 	Total int64          `json:"total"`
-	Asset []*model.Asset `json:"asset_logs"`
+	Asset []*model.Asset `json:"asset"`
 }

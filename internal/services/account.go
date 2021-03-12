@@ -10,7 +10,7 @@ import (
 )
 
 type accountService struct {
-	price float64
+	price float64 //per hour price
 	db    *gorm.DB
 }
 
@@ -57,8 +57,8 @@ func (s *accountService) GetAccounts(ctx context.Context, req *service.GetAccoun
 	}
 	err = db.Offset(req.Offset).
 		Limit(req.Limit).
-		Order("id DESC").
-		Find(rep.Accounts).Error //db.Find 获取全部记录
+		Order("id desc").
+		Find(&rep.Accounts).Error //db.Find 获取全部记录
 	if err != nil {
 		return nil, err
 	}

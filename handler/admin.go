@@ -55,6 +55,20 @@ func parseBearToken(authorization string) string {
 }
 
 func (h *Handler) SessionVerifier(c *gin.Context) {
+	authorization := c.GetHeader("Authorization")
+	tokenStr := parseBearToken(authorization)
+	var req = service.SessionVerifyReq{AccessToken: tokenStr}
+	err := h.AdminService.SessionVerify(c, &req)
+	if err != nil {
+		log.Printf("[E] NewAccount: %v", err)
+		c.JSON(http.StatusInternalServerError, err.Error())
+		c.Abort()
+		return
+	}
+	c.Next()
+}
+
+/*func (h *Handler) SessionVerifier(c *gin.Context) {
 	authorization := c.GetHeader("Authorization") //获取请求头部信息
 	tokenStr := parseBearToken(authorization)
 	var req = service.SessionVerifyReq{AccessToken: tokenStr}
@@ -66,4 +80,4 @@ func (h *Handler) SessionVerifier(c *gin.Context) {
 		return
 	}
 	c.Next() //作为中间件，简单理解next表示挂起，当处理完所有的中间件函数（包括本次请求）的时候才会停止，执行完一次完整的请求。
-}
+}*/

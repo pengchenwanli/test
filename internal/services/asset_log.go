@@ -72,8 +72,8 @@ func (s *AssetLogService) GetAssetLogs(ctx context.Context, req *service.AssetLo
 	db := s.db.
 		Model(model.Asset{}).
 		Where(&model.Asset{
-			Id:     req.Id,
-			IdCard: req.IdCard,
+			ID:     req.Id,
+			IDCard: req.IdCard,
 			Type:   req.Type,
 		})
 	if !req.SinceTime.IsZero() {

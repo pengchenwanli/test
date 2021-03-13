@@ -166,6 +166,61 @@ func (s *adminService) SessionVerify(ctx context.Context, req *service.SessionVe
 	return nil
 }
 
+//func (s *adminService) LogoutAdmin(ctx context.Context) error {
+//	// read admin information from context
+//	c := GetContext(ctx)
+//	// delete token of this admin
+//	err := s.db.Delete(&model.Token{}, "admin_id = ?", c.Token.AdminId).Error
+//	return err
+//}
+//
+//func getTokenByAccessToken(db *gorm.DB, accessToken string) (*model.Token, error) {
+//	var token model.Token
+//	err := db.Where("access_token", accessToken).First(&token).Error
+//	if err != nil {
+//		return nil, err
+//	}
+//	return &token, nil
+//}
+//
+//var ErrInvalidToken = errors.New("invalid token")
+//
+//func invalidTokenErr(err error) error {
+//	if errors.Is(err, gorm.ErrRecordNotFound) {
+//		return ErrInvalidToken
+//	}
+//	return err
+//}
+//
+//func (s *adminService) SessionVerify(ctx context.Context, req *service.SessionVerifyReq) error {
+//	// TODO: parse token
+//	token, err := getTokenByAccessToken(s.db, req.AccessToken)
+//	if err != nil {
+//		return invalidTokenErr(err)
+//	}
+//
+//	if token.IsExpired() {
+//		err := s.db.Where("id", token.Id).Delete(&model.Token{}).Error
+//		if err != nil {
+//			return err
+//		}
+//		return ErrInvalidToken
+//	}
+//
+//	// validate token & get admin information
+//	admin, err := getAdminById(s.db, token.AdminId)
+//	if err != nil {
+//		return err
+//	}
+//
+//	ctx = WithContext(ctx, &Context{
+//		Token: token,
+//		Admin: admin,
+//	})
+//
+//	return nil
+//}
+
 /*package services
 
 import (

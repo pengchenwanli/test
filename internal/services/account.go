@@ -74,7 +74,7 @@ func (s *accountService) ChargeAccount(ctx context.Context, req *service.ChargeA
 		return nil, err
 	}
 	assetLog := &model.Asset{
-		IdCard: req.IdCard,
+		IDCard: req.IdCard,
 		Type:   model.AssetTypeCharge,
 		Amount: float64(req.Amount),
 	}
@@ -99,7 +99,7 @@ func (s *accountService) CalcAccount(ctx context.Context, req *service.CalcAccou
 		return nil, err
 	}
 	assetLog := &model.Asset{
-		IdCard: req.IdCard,
+		IDCard: req.IdCard,
 		Type:   model.AssetTypeConsume,
 		Amount: amount,
 	}

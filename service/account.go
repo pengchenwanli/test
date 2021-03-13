@@ -28,7 +28,7 @@ type GetAccountsReq struct {
 }
 type GetAccountsRep struct {
 	Total    int64            `json:"total"`
-	Accounts []*model.Account `json:"account"`
+	Accounts []*model.Account `json:"accounts"`
 }
 type ChargeAccountReq struct {
 	IdCard string `json:"id_card" form:"id_card" binding:"required"`

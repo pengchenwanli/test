@@ -21,7 +21,7 @@ func (h *Handler) initRouter() {
 		}
 		{
 			asset := auth.Group("asset")
-			asset.GET("", h.GetAssetLog)
+			asset.GET("logs", h.GetAssetLog)
 		}
 	}
 }

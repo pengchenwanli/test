@@ -6,10 +6,10 @@ import (
 )
 
 type Admin struct {
-	Id       int64          `json:"id" gorm:"primaryKey"`
-	Account  string         `json:"account" gorm:"type:varchar(255);uniqueIndex"`
-	Password string         `json:"-" gorm:"type:varchar(255)"`
-	CreateAt time.Time      `json:"create_at"`
-	UpdateAt time.Time      `json:"update_at"`
-	DeleteAt gorm.DeletedAt `json:"_" gorm:"index"`
+	Id        int64          `json:"id" gorm:"primaryKey"`
+	Account   string         `json:"account" gorm:"type:varchar(255);uniqueIndex"`
+	Password  string         `json:"-" gorm:"type:varchar(255)"`
+	CreatedAt time.Time      `json:"created_at"`
+	UpdatedAt time.Time      `json:"updated_at"`
+	DeletedAt gorm.DeletedAt `json:"_" gorm:"index"`
 }

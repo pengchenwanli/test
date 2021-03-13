@@ -34,7 +34,7 @@ func (s *adminService) NewAdmin(ctx context.Context, req *service.NewAdminReq) (
 	if err != nil {
 		return nil, err
 	}
-	return &service.NewAdminRep{Admin: admin}, err
+	return &service.NewAdminRep{Admin: admin}, nil
 }
 
 func getAdminById(db *gorm.DB, id int64) (*model.Admin, error) {

@@ -51,7 +51,7 @@ func (h *Handler) Logout(c *gin.Context) {
 }
 
 func parseBearToken(authorization string) string {
-	return strings.TrimPrefix(authorization, "Bearer") //strings.TrimPrefix删除开头一样的前缀，还有strings.TrimLeft()：删除之后剩余的字符若开头与前缀存在一样的字符则还会删除
+	return strings.TrimPrefix(authorization, "Bearer ") //strings.TrimPrefix删除开头一样的前缀，还有strings.TrimLeft()：删除之后剩余的字符若开头与前缀存在一样的字符则还会删除
 }
 
 func (h *Handler) SessionVerifier(c *gin.Context) {

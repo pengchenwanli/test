@@ -4,7 +4,7 @@ import "time"
 
 type Token struct {
 	Id          int64     `json:"id" gorm:"primaryKey"`
-	AdminId     int64     `json:"amin_id" gorm:"index"`
+	AdminId     int64     `json:"admin_id" gorm:"index"`
 	AccessToken string    `json:"access_token" gorm:"index"`
 	CreatedAt   time.Time `json:"created_at" `
 	UpdatedAt   time.Time `json:"updated_at"`

@@ -9,7 +9,7 @@ import (
 
 func (h *Handler) GetAssetLog(c *gin.Context) {
 	var req service.AssetLogReq
-	err := c.ShouldBind(req)
+	err := c.ShouldBind(&req)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, err)
 		return

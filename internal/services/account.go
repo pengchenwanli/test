@@ -73,10 +73,16 @@ func (s *accountService) ChargeAccount(ctx context.Context, req *service.ChargeA
 	if err != nil {
 		return nil, err
 	}
+	c := GetContext(ctx)
+	admin := c.Admin
+	//var r *service.LoginAdminReq
+	//admin,err:=NewAdmin()
+	//admin,err:=getAdminByAccount(s.db,request.Account)
 	assetLog := &model.Asset{
-		IDCard: req.IdCard,
-		Type:   model.AssetTypeCharge,
-		Amount: float64(req.Amount),
+		IDCard:  req.IdCard,
+		Type:    model.AssetTypeCharge,
+		Amount:  float64(req.Amount),
+		AdminId: admin.Id,
 	}
 	err = s.db.Create(assetLog).Error //gorm创建记录利用db.Create,创建数据行
 	if err != nil {

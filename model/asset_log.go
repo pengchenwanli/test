@@ -14,4 +14,5 @@ type Asset struct {
 	Type      int64     `json:"type"`
 	Amount    float64   `json:"amount"`
 	CreatedAt time.Time `json:"created_at"`
+	AdminId   int64     `json:"admin_id"`
 }
